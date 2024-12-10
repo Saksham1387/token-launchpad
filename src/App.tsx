@@ -10,6 +10,7 @@ import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { useMemo } from "react";
 import { TokenLaunchpad } from "./components/token-launchpad";
+import { RecoilRoot } from "recoil";
 
 function App() {
   const network = WalletAdapterNetwork.Devnet;
@@ -17,6 +18,7 @@ function App() {
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
   return (
+    <RecoilRoot>
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={[]} autoConnect>
         <WalletModalProvider>
@@ -24,6 +26,7 @@ function App() {
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
+    </RecoilRoot>
   );
 }
 

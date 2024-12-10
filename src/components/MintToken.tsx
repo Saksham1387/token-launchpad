@@ -18,11 +18,12 @@ import { decimals } from "@/atoms/atoms";
 interface MinProps {
   mintAddress: PublicKey;
 }
+
 export function MintToken({ mintAddress }: MinProps) {
   const wallet = useWallet();
   const { connection } = useConnection();
   const [number] = useRecoilState(decimals);
-  const [amount,setAmount] = useState(0)
+  const [amount, setAmount] = useState(0);
   async function mint() {
     try {
       if (!wallet.publicKey) {
@@ -61,7 +62,7 @@ export function MintToken({ mintAddress }: MinProps) {
           mintAddress,
           associatedToken,
           wallet.publicKey,
-          amount * (10 ** number),
+          amount * 10 ** number,
           [],
           TOKEN_2022_PROGRAM_ID
         )
@@ -90,7 +91,6 @@ export function MintToken({ mintAddress }: MinProps) {
       await connection.confirmTransaction(signature);
 
       console.log("Minting done for token " + mintAddress.toBase58());
-     
     } catch (error) {
       console.error("Error minting token:", error);
     }
@@ -104,9 +104,7 @@ export function MintToken({ mintAddress }: MinProps) {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-5">
-          <div className="text-white text-center">
-          {mintAddress.toBase58()}
-          </div>
+          <div className="text-white text-center">{mintAddress.toBase58()}</div>
           <div className="space-y-2">
             <Label htmlFor="mintAmount" className="text-gray-300">
               Mint Amount

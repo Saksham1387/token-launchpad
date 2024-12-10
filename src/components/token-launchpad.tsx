@@ -308,7 +308,7 @@ export const TokenLaunchpad = () => {
                           setNumber(Number(e.target.value));
                         }}
                         type="number"
-                        placeholder="Enter token description"
+                        placeholder="Enter token decimals"
                         className="bg-gray-900 border-gray-800 text-white"
                       />
                     </div>

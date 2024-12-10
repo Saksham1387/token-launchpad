@@ -37,6 +37,8 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import { MintToken } from "./MintToken";
+import { useRecoilState } from "recoil";
+import { decimals } from "@/atoms/atoms";
 
 const PINATA_JWT = import.meta.env.VITE_PINATA_JWT;
 
@@ -48,6 +50,7 @@ export const TokenLaunchpad = () => {
   const [symbol, setSymbol] = useState("");
   const [description, setDescription] = useState("");
   const [initialSupply, setInitialSupply] = useState(0);
+  const [number,setNumber] = useRecoilState(decimals);
   const [tokenImage, setTokenImage] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -164,7 +167,8 @@ export const TokenLaunchpad = () => {
         ),
         createInitializeMintInstruction(
           mintKeypair.publicKey,
-          9,
+          //decimals
+          number,
           wallet.publicKey!,
           null,
           TOKEN_2022_PROGRAM_ID
@@ -289,6 +293,21 @@ export const TokenLaunchpad = () => {
                         onChange={(e) => {
                           setDescription(e.target.value);
                         }}
+                        placeholder="Enter token description"
+                        className="bg-gray-900 border-gray-800 text-white"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="tokenSymbol" className="text-gray-300">
+                        Decimal
+                      </Label>
+                      <Input
+                        id="tokenSymbol"
+                        onChange={(e) => {
+                          setNumber(Number(e.target.value));
+                        }}
+                        type="number"
                         placeholder="Enter token description"
                         className="bg-gray-900 border-gray-800 text-white"
                       />

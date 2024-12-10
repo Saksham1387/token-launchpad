@@ -11,6 +11,9 @@ import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { decimals } from "@/atoms/atoms";
 
 interface MinProps {
   mintAddress: PublicKey;
@@ -18,6 +21,8 @@ interface MinProps {
 export function MintToken({ mintAddress }: MinProps) {
   const wallet = useWallet();
   const { connection } = useConnection();
+  const [number] = useRecoilState(decimals);
+  const [amount,setAmount] = useState(0)
   async function mint() {
     try {
       if (!wallet.publicKey) {
@@ -56,7 +61,7 @@ export function MintToken({ mintAddress }: MinProps) {
           mintAddress,
           associatedToken,
           wallet.publicKey,
-          1000000000,
+          amount * (10 ** number),
           [],
           TOKEN_2022_PROGRAM_ID
         )
@@ -110,8 +115,8 @@ export function MintToken({ mintAddress }: MinProps) {
               id="mintAmount"
               type="number"
               placeholder="Enter amount to mint"
-              // value={amount}
-              // onChange={(e) => setAmount(e.target.value)}
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
               className="bg-gray-900 border-gray-800 text-white"
             />
           </div>

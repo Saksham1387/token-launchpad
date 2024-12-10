@@ -1,4 +1,5 @@
 <img src="./public/image.png" />
+
 # Solana Token Launchpad
 
 The **Solana Token Launchpad** is a platform where users can effortlessly create and launch their Solana tokens. The platform allows users to provide all necessary details about their tokens, including images and metadata, and stores this information on IPFS using Pinata.

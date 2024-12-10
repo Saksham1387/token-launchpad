@@ -49,8 +49,7 @@ export const TokenLaunchpad = () => {
   const [tokenaddress, setTokenaddress] = useState<PublicKey>();
   const [symbol, setSymbol] = useState("");
   const [description, setDescription] = useState("");
-  const [initialSupply, setInitialSupply] = useState(0);
-  const [number,setNumber] = useRecoilState(decimals);
+  const [number, setNumber] = useRecoilState(decimals);
   const [tokenImage, setTokenImage] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -309,20 +308,6 @@ export const TokenLaunchpad = () => {
                         }}
                         type="number"
                         placeholder="Enter token decimals"
-                        className="bg-gray-900 border-gray-800 text-white"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="tokenSupply" className="text-gray-300">
-                        Initial Supply
-                      </Label>
-                      <Input
-                        id="tokenSupply"
-                        onChange={(e) => {
-                          setInitialSupply(Number(e.target.value));
-                        }}
-                        type="number"
-                        placeholder="Enter initial supply"
                         className="bg-gray-900 border-gray-800 text-white"
                       />
                     </div>
